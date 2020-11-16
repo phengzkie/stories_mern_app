@@ -27,13 +27,15 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if (currentId) {
       dispatch(updatePost(currentId, postData));
-      console.log(postData);
+      clear();
     } else {
       dispatch(createPost(postData));
+      clear();
     }
   };
 
   const clear = () => {
+    setCurrentId(0);
     setPostData({
       creator: '',
       title: '',
@@ -46,7 +48,7 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <Paper className={classes.paper}>
       <form className={`${classes.root} ${classes.form}`} autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Typography variant="h6">Creating a Story</Typography>
+        <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Story</Typography>
         <TextField
           name="creator"
           variant="outlined"
